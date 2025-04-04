@@ -11,11 +11,11 @@ import { NavigationProps } from "../../types/navigation";
 import { MaterialIcons } from "@expo/vector-icons";
 import { styles } from "./Style";
 
-const Onboarding1 = () => {
+const Onboarding2 = () => {
   const navigation = useNavigation<NavigationProps>();
 
   const handleNext = () => {
-    navigation.navigate("Onboarding2");
+    navigation.navigate("Onboarding3");
   };
 
   const handleSkip = () => {
@@ -30,23 +30,23 @@ const Onboarding1 = () => {
       </TouchableOpacity>
 
       <ImageBackground
-        source={require("../../assets/imgs/Onboarding1.png")}
+        source={require("../../assets/imgs/Onboarding2.png")}
         style={styles.backgroundImage}
         resizeMode="cover"
       >
         <View style={styles.contentWrapper}>
           <View style={styles.contentContainer}>
             <Image
-              source={require("../../assets/icons/Others/icon_run.png")}
-              style={styles.runningIcon}
+              source={require("../../assets/icons/Others/icon_nutrition.png")}
+              style={styles.nutritionIcon}
               resizeMode="contain"
             />
             <Text style={styles.title}>
-              Start Your Journey Towards A{"\n"}More Active Lifestyle
+              Find Nutrition Tips That Fit{"\n"}Your Lifestyle
             </Text>
             <View style={styles.indicatorContainer}>
-              <View style={[styles.indicator, styles.activeIndicator]} />
               <View style={styles.indicator} />
+              <View style={[styles.indicator, styles.activeIndicator]} />
               <View style={styles.indicator} />
             </View>
           </View>
@@ -59,4 +59,4 @@ const Onboarding1 = () => {
   );
 };
 
-export default Onboarding1;
+export default Onboarding2;

@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    backgroundColor: '#B3A0FF',
+    backgroundColor: 'rgba(179, 160, 255, 0.9)',
     paddingVertical: 40,
     marginTop: '70%',
     alignItems: 'center',
@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
   },
-  runningIcon: {
+  communityIcon: {
     width: 48,
     height: 48,
     tintColor: '#E2F163',
@@ -72,28 +72,29 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff',
     width: 30,
   },
-  nextButton: {
+  startButton: {
     backgroundColor: 'rgba(252, 250, 250, 0.41)',
     width: width * 0.5,
-    alignSelf: 'center',
-    paddingVertical: 15,
+    height: 50,
     borderRadius: 30,
+    justifyContent: 'center',
     alignItems: 'center',
+    alignSelf: 'center',
     marginTop: 30,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.5)',
+    borderColor: 'rgba(255, 255, 255, 0.3)',
     shadowColor: '#fff',
     shadowOffset: {
       width: 0,
-      height: 0,
+      height: 2,
     },
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.15,
     shadowRadius: 10,
     elevation: 5,
   },
-  nextButtonText: {
+  startButtonText: {
     color: '#fff',
     fontSize: 16,
     fontFamily: FONTS.POPPINS.bold,
   },
-});
+}); 
