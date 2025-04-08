@@ -1,4 +1,4 @@
-import { StackNavigationProp } from '@react-navigation/stack';
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export type RootStackParamList = {
   Welcome: undefined;
@@ -12,11 +12,21 @@ export type RootStackParamList = {
   ResetPass: undefined;
   ResetSuccess: undefined;
   SetUp: undefined;
+  Gender: undefined;
+  Age: undefined;
+  Height: undefined;
+  Weight: undefined;
+  GoalPicker: undefined;
+  ActiveLevel: undefined;
+  FillProfile: undefined;
   Home: undefined;
-  GenderPick: undefined;
-  AgePicker: undefined;
-  WeightPicker: undefined;
-  HeightPicker: undefined;
+  MainApp: undefined;
+  Workout: undefined;
+  ProgressTracking: undefined;
+  Nutrition: undefined;
+  Community: undefined;
+  Recommendation: undefined;
+  WeeklyChallenge: undefined;
 };
 
-export type NavigationProps = StackNavigationProp<RootStackParamList>; 
+export type NavigationProps = NativeStackNavigationProp<RootStackParamList>;

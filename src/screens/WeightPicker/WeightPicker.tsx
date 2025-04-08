@@ -10,6 +10,7 @@ import {
 import { styles } from "./Style";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps } from "../../types/navigation";
+import Header from "../../components/Header";
 
 const { width } = Dimensions.get("window");
 const ITEM_WIDTH = 80;
@@ -20,17 +21,12 @@ const WeightPicker = () => {
   const [selectedUnit, setSelectedUnit] = useState<"KG" | "LB">("KG");
   const scrollViewRef = useRef<ScrollView>(null);
 
-  const handleBack = () => {
-    navigation.goBack();
-  };
-
   const handleContinue = () => {
     navigation.navigate("HeightPicker");
   };
 
   const weights = Array.from({ length: 301 }, (_, i) => i);
 
-  // Căn giữa số cân nặng được chọn khi component mount
   useEffect(() => {
     setTimeout(() => {
       handleWeightSelect(selectedWeight);
@@ -39,7 +35,6 @@ const WeightPicker = () => {
 
   const handleWeightSelect = (weight: number) => {
     setSelectedWeight(weight);
-    // Scroll to center the selected weight
     scrollViewRef.current?.scrollTo({
       x: weight * ITEM_WIDTH,
       animated: true,
@@ -71,22 +66,9 @@ const WeightPicker = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-          <View style={styles.backContent}>
-            <Image
-              source={require("../../assets/icons/icon_back.png")}
-              style={styles.backIcon}
-              resizeMode="contain"
-            />
-            <Text style={styles.backText}>Back</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <Header title="What Is Your Weight?" onBack={() => navigation.goBack()} />
 
       <View style={styles.content}>
-        <Text style={styles.title}>What Is Your Weight?</Text>
-
         <View style={styles.subtitleContainer}>
           <Text style={styles.subtitle}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

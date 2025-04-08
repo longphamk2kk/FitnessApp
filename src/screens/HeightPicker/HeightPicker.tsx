@@ -10,6 +10,7 @@ import {
 import { styles } from "./Style";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps } from "../../types/navigation";
+import Header from "../../components/Header";
 
 const { width } = Dimensions.get("window");
 const ITEM_WIDTH = 80;
@@ -20,15 +21,11 @@ const HeightPicker = () => {
   const [selectedUnit, setSelectedUnit] = useState<"CM" | "FT">("CM");
   const scrollViewRef = useRef<ScrollView>(null);
 
-  const handleBack = () => {
-    navigation.goBack();
-  };
-
   const handleContinue = () => {
-    navigation.navigate("Home");
+    navigation.navigate("GoalPicker");
   };
 
-  const heights = Array.from({ length: 251 }, (_, i) => i + 50); // 50cm to 300cm
+  const heights = Array.from({ length: 301 }, (_, i) => i);
 
   useEffect(() => {
     setTimeout(() => {
@@ -38,9 +35,8 @@ const HeightPicker = () => {
 
   const handleHeightSelect = (height: number) => {
     setSelectedHeight(height);
-    const index = heights.indexOf(height);
     scrollViewRef.current?.scrollTo({
-      x: index * ITEM_WIDTH,
+      x: height * ITEM_WIDTH,
       animated: true,
     });
   };
@@ -70,22 +66,9 @@ const HeightPicker = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-          <View style={styles.backContent}>
-            <Image
-              source={require("../../assets/icons/icon_back.png")}
-              style={styles.backIcon}
-              resizeMode="contain"
-            />
-            <Text style={styles.backText}>Back</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <Header title="What Is Your Height?" onBack={() => navigation.goBack()} />
 
       <View style={styles.content}>
-        <Text style={styles.title}>What Is Your Height?</Text>
-
         <View style={styles.subtitleContainer}>
           <Text style={styles.subtitle}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

@@ -1,35 +1,35 @@
 {
   "expo": {
     "name": "FitnessApp",
-    "slug": "fitness-app",
+    "slug": "FitnessApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/imgs/appIcon.png",
+    "icon": "./assets/imgs/Group.png",
     "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./src/assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.fitnessapp",
-      "infoPlist": {
-        "NSFaceIDUsageDescription": "This app uses Face ID to provide secure authentication."
-      }
+      "bundleIdentifier": "com.fitnessapp"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/imgs/appIcon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.fitnessapp"
     },
     "plugins": [
       [
-        "expo-local-authentication",
+        "expo-image-picker",
         {
-          "faceIDPermission": "Allow $(PRODUCT_NAME) to use Face ID."
+          "photosPermission": "The app accesses your photos to let you share them with your friends.",
+          "cameraPermission": "The app accesses your camera to let you take photos to share with your friends."
         }
       ]
     ]

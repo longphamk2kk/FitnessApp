@@ -13,6 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NavigationProps } from "../../types/navigation";
 import * as LocalAuthentication from "expo-local-authentication";
 import { styles } from "./Style";
+import Header from "../../components/Header";
 
 const Login = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -80,16 +81,7 @@ const Login = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-            <Image
-              source={require("../../assets/icons/icon_back.png")}
-              style={styles.backIcon}
-              resizeMode="contain"
-            />
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>Log In</Text>
-        </View>
+        <Header title="Log In" onBack={() => navigation.goBack()} />
 
         <View style={styles.welcomeContainer}>
           <Text style={styles.welcomeText}>Welcome</Text>

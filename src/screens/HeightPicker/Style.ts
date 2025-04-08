@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
   subtitle: {
     fontSize: 14,
     fontFamily: FONTS.POPPINS.regular,
-    color: '#1C1C1E',
+    color: '#ffffff',
     textAlign: 'center',
     lineHeight: 20,
     paddingHorizontal: 20,

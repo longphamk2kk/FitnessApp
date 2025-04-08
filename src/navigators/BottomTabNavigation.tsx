@@ -1,50 +1,69 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Image } from "react-native";
+import { Image, View, StyleSheet } from "react-native";
 
-// Import các màn hình cần hiển thị trong bottom tab
-import HomeScreen from "../screens/HomeScreen";
-import ProfileScreen from "../screens/ProfileScreen";
-import SettingsScreen from "../screens/SettingsScreen";
+// Import các màn hình
+import Home from "../screens/Home/Home";
+import Progress from "../screens/Progress/Progress";
+import Favorite from "../screens/Favorite/Favorite";
+import Support from "../screens/Support/Support";
 
 const Tab = createBottomTabNavigator();
 
-const BottomTabNavigator: React.FC = () => {
+const styles = StyleSheet.create({
+  tabBar: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "#B3A0FF",
+    // borderTopLeftRadius: 20,
+    // borderTopRightRadius: 20,
+    height: 70,
+    paddingBottom: 8,
+  },
+  tabIcon: {
+    width: 30,
+    height: 30,
+  },
+});
+
+const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarIcon: ({ focused, color, size }) => {
+        tabBarShowLabel: false,
+        tabBarStyle: styles.tabBar,
+        tabBarIcon: ({ focused }) => {
           let iconSource;
 
           if (route.name === "Home") {
             iconSource = focused
-              ? require("../assets/icons/home_active.png")
-              : require("../assets/icons/home.png");
-          } else if (route.name === "Profile") {
+              ? require("../assets/icons/BottomTab/icon_home_variant.png")
+              : require("../assets/icons/BottomTab/icon_home_default.png");
+          } else if (route.name === "Progress") {
             iconSource = focused
-              ? require("../assets/icons/profile_active.png")
-              : require("../assets/icons/profile.png");
-          } else if (route.name === "Settings") {
+              ? require("../assets/icons/BottomTab/icon_resources_variant.png")
+              : require("../assets/icons/BottomTab/icon_resources_default.png");
+          } else if (route.name === "Favorite") {
             iconSource = focused
-              ? require("../assets/icons/settings_active.png")
-              : require("../assets/icons/settings.png");
+              ? require("../assets/icons/BottomTab/icon_favorite_variant.png")
+              : require("../assets/icons/BottomTab/icon_favorite_default.png");
+          } else if (route.name === "Support") {
+            iconSource = focused
+              ? require("../assets/icons/BottomTab/icon_support_variant.png")
+              : require("../assets/icons/BottomTab/icon_support_default.png");
           }
 
-          return (
-            <Image
-              source={iconSource}
-              style={{ width: size, height: size, tintColor: color }}
-            />
-          );
+          return <Image source={iconSource} style={styles.tabIcon} />;
         },
-        tabBarActiveTintColor: "#42a5f5",
-        tabBarInactiveTintColor: "gray",
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Progress" component={Progress} />
+      <Tab.Screen name="Favorite" component={Favorite} />
+      <Tab.Screen name="Support" component={Support} />
     </Tab.Navigator>
   );
 };

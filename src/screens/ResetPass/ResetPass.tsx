@@ -3,13 +3,10 @@ import { View, Text, TouchableOpacity, Image, TextInput } from "react-native";
 import { styles } from "./Style";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps } from "../../types/navigation";
+import Header from "../../components/Header";
 
 const ResetPass = () => {
   const navigation = useNavigation<NavigationProps>();
-
-  const handleBack = () => {
-    navigation.goBack();
-  };
 
   const handleResetPassword = () => {
     navigation.navigate("ResetSuccess");
@@ -17,16 +14,7 @@ const ResetPass = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-          <Image
-            source={require("../../assets/icons/icon_back.png")}
-            style={styles.backIcon}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Set Password</Text>
-      </View>
+      <Header title="Set Password" onBack={() => navigation.goBack()} />
 
       <View style={styles.content}>
         <View style={styles.titleContainer}>
