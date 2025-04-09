@@ -28,6 +28,23 @@ export const styles = StyleSheet.create({
     fontFamily: FONTS.POPPINS.semiBold,
     color: "#E2F163",
     marginLeft: 8,
-    textAlign:"center"
+    textAlign: "center",
+  },
+  leftContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  rightContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 16,
+  },
+  iconButton: {
+    padding: 4,
+  },
+  icon: {
+    width: 24,
+    height: 24,
+    tintColor: "#FFFFFF",
   },
 });

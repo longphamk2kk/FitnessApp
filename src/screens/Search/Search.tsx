@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-const Favorite = () => {
+const Search = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Favorite Screen</Text>
+      <Text style={styles.text}>Search Screen</Text>
     </View>
   );
 };
@@ -14,12 +14,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#1C1C1E",
+    backgroundColor: "#000",
   },
   text: {
-    color: "#FFFFFF",
+    color: "#fff",
     fontSize: 20,
   },
 });
 
-export default Favorite;
+export default Search;

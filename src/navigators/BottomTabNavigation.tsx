@@ -5,7 +5,7 @@ import { Image, View, StyleSheet } from "react-native";
 // Import các màn hình
 import Home from "../screens/Home/Home";
 import Progress from "../screens/Progress/Progress";
-import Favorite from "../screens/Favorite/Favorite";
+import Favourite from "../screens/Favourite/Favourite";
 import Support from "../screens/Support/Support";
 
 const Tab = createBottomTabNavigator();
@@ -46,7 +46,7 @@ const BottomTabNavigator = () => {
             iconSource = focused
               ? require("../assets/icons/BottomTab/icon_resources_variant.png")
               : require("../assets/icons/BottomTab/icon_resources_default.png");
-          } else if (route.name === "Favorite") {
+          } else if (route.name === "Favourite") {
             iconSource = focused
               ? require("../assets/icons/BottomTab/icon_favorite_variant.png")
               : require("../assets/icons/BottomTab/icon_favorite_default.png");
@@ -62,7 +62,7 @@ const BottomTabNavigator = () => {
     >
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Progress" component={Progress} />
-      <Tab.Screen name="Favorite" component={Favorite} />
+      <Tab.Screen name="Favourite" component={Favourite} />
       <Tab.Screen name="Support" component={Support} />
     </Tab.Navigator>
   );

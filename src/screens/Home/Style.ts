@@ -6,14 +6,15 @@ const { width } = Dimensions.get("window");
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1C1C1E",
+    backgroundColor: "#000",
+    paddingTop: 0,
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 20,
-    paddingTop: 60,
+    paddingTop: 20,
     paddingBottom: 20,
   },
   titleContainer: {
@@ -75,9 +76,10 @@ export const styles = StyleSheet.create({
     marginBottom: 16,
   },
   sectionTitle: {
-    fontSize: 20,
-    fontFamily: FONTS.POPPINS.semiBold,
-    color: "#FFFFFF",
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#E2F163",
+    marginBottom: 10,
   },
   seeAllButton: {
     flexDirection: "row",
@@ -85,13 +87,12 @@ export const styles = StyleSheet.create({
   },
   seeAllText: {
     fontSize: 14,
-    fontFamily: FONTS.POPPINS.medium,
     color: "#E2F163",
-    marginRight: 4,
+    marginRight: 5,
   },
   arrowIcon: {
-    width: 16,
-    height: 16,
+    width: 12,
+    height: 12,
     tintColor: "#E2F163",
     transform: [{ rotate: "180deg" }],
   },
@@ -142,5 +143,42 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: FONTS.POPPINS.regular,
     color: "#FFFFFF",
+  },
+  articleContainer: {
+    paddingHorizontal: 20,
+    marginTop: 24,
+  },
+  articleGrid: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  articleCard: {
+    width: (width - 60) / 2,
+    backgroundColor: "#1C1C1E",
+    borderRadius: 12,
+    overflow: "hidden",
+    marginBottom: 20,
+  },
+  articleImage: {
+    width: "100%",
+    height: 120,
+  },
+  articleContent: {
+    padding: 10,
+  },
+  articleTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#E5E5E5",
+    marginBottom: 5,
+  },
+  articleSubtitle: {
+    fontSize: 12,
+    color: "#E5E5E5",
+    opacity: 0.7,
+  },
+  sectionContainer: {
+    marginVertical: 20,
+    paddingHorizontal: 16,
   },
 });

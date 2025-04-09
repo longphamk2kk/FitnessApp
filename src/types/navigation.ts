@@ -27,6 +27,10 @@ export type RootStackParamList = {
   Community: undefined;
   Recommendation: undefined;
   WeeklyChallenge: undefined;
+  ArticleAndTips: undefined;
+  Search: undefined;
+  Notification: undefined;
+  Profile: undefined;
 };
 
 export type NavigationProps = NativeStackNavigationProp<RootStackParamList>;

@@ -30,6 +30,10 @@ import Nutrition from "../screens/Nutrition/Nutrition";
 import Community from "../screens/Community/Community";
 import Recommendation from "../screens/Recommendation";
 import WeeklyChallenge from "../screens/WeeklyChallenge/WeeklyChallenge";
+import ArticleAndTips from "../screens/ArticleAndTips/ArticleAndTips";
+import Search from "../screens/Search/Search";
+import Notification from "../screens/Notification/Notification";
+import Profile from "../screens/Profile/Profile";
 
 const Stack = createStackNavigator();
 
@@ -552,6 +556,24 @@ const AppNavigator = () => {
           name="WeeklyChallenge"
           component={WeeklyChallenge}
           options={{
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          }}
+        />
+        <Stack.Screen
+          name="ArticleAndTips"
+          component={ArticleAndTips}
+          options={{
+            headerShown: false,
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          }}
+        />
+        <Stack.Screen name="Search" component={Search} />
+        <Stack.Screen name="Notification" component={Notification} />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            headerShown: false,
             cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
           }}
         />
