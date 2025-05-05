@@ -34,550 +34,589 @@ import ArticleAndTips from "../screens/ArticleAndTips/ArticleAndTips";
 import Search from "../screens/Search/Search";
 import Notification from "../screens/Notification/Notification";
 import Profile from "../screens/Profile/Profile";
+import ProfileEdit from "../screens/ProfileEdit/ProfileEdit";
+import Settings from "../screens/Settings/Settings";
+import NotificationSetting from "../screens/Settings/NotificationSetting";
+import PasswordSetting from "../screens/Settings/PasswordSetting";
+import { ProfileProvider } from "../context/ProfileContext";
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Welcome"
-        screenOptions={{
-          headerShown: false,
-          gestureEnabled: true,
-          gestureDirection: "horizontal",
-          cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
-          transitionSpec: {
-            open: {
-              animation: "timing",
-              config: {
-                duration: 500,
-              },
-            },
-            close: {
-              animation: "timing",
-              config: {
-                duration: 500,
-              },
-            },
-          },
-        }}
-      >
-        <Stack.Screen
-          name="Welcome"
-          component={Welcome}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
-          }}
-        />
-        <Stack.Screen
-          name="Welcome2"
-          component={Welcome2}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
-          }}
-        />
-        <Stack.Screen
-          name="Onboarding1"
-          component={Onboarding1}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
-          }}
-        />
-        <Stack.Screen
-          name="Onboarding2"
-          component={Onboarding2}
-          options={{
-            cardStyleInterpolator:
-              CardStyleInterpolators.forScaleFromCenterAndroid,
-            transitionSpec: {
-              open: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-              close: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-            },
-          }}
-        />
-        <Stack.Screen
-          name="Onboarding3"
-          component={Onboarding3}
-          options={{
-            cardStyleInterpolator:
-              CardStyleInterpolators.forScaleFromCenterAndroid,
-            transitionSpec: {
-              open: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-              close: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-            },
-          }}
-        />
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            transitionSpec: {
-              open: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-              close: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-            },
-          }}
-        />
-        <Stack.Screen
-          name="SignUp"
-          component={SignUp}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            transitionSpec: {
-              open: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-              close: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-            },
-          }}
-        />
-        <Stack.Screen
-          name="ForgotPass"
-          component={ForgotPass}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            transitionSpec: {
-              open: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-              close: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-            },
-          }}
-        />
-        <Stack.Screen
-          name="ResetPass"
-          component={ResetPass}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          }}
-        />
-        <Stack.Screen
-          name="ResetSuccess"
-          component={ResetSuccess}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
-          }}
-        />
-        <Stack.Screen
-          name="SetUp"
-          component={SetUp}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            transitionSpec: {
-              open: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-              close: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-            },
-          }}
-        />
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            transitionSpec: {
-              open: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-              close: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-            },
-          }}
-        />
-        <Stack.Screen
-          name="GenderPick"
-          component={GenderPick}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            transitionSpec: {
-              open: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-              close: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-            },
-          }}
-        />
-        <Stack.Screen
-          name="AgePicker"
-          component={AgePicker}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            transitionSpec: {
-              open: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-              close: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-            },
-          }}
-        />
-        <Stack.Screen
-          name="WeightPicker"
-          component={WeightPicker}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          }}
-        />
-        <Stack.Screen
-          name="HeightPicker"
-          component={HeightPicker}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            transitionSpec: {
-              open: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-              close: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-            },
-          }}
-        />
-        <Stack.Screen
-          name="GoalPicker"
-          component={GoalPicker}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            transitionSpec: {
-              open: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-              close: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-            },
-          }}
-        />
-        <Stack.Screen
-          name="ActiveLevel"
-          component={ActiveLevel}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            transitionSpec: {
-              open: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-              close: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-            },
-          }}
-        />
-        <Stack.Screen
-          name="FillProfile"
-          component={FillProfile}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-            transitionSpec: {
-              open: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-              close: {
-                animation: "spring",
-                config: {
-                  stiffness: 1000,
-                  damping: 500,
-                  mass: 3,
-                  overshootClamping: true,
-                  restDisplacementThreshold: 0.01,
-                  restSpeedThreshold: 0.01,
-                },
-              },
-            },
-          }}
-        />
-        <Stack.Screen
-          name="MainApp"
-          component={BottomTabNavigator}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          }}
-        />
-        <Stack.Screen
-          name="Workout"
-          component={Workout}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          }}
-        />
-        <Stack.Screen
-          name="ProgressTracking"
-          component={ProgressTracking}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          }}
-        />
-        <Stack.Screen
-          name="Nutrition"
-          component={Nutrition}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          }}
-        />
-        <Stack.Screen
-          name="Community"
-          component={Community}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          }}
-        />
-        <Stack.Screen
-          name="Recommendation"
-          component={Recommendation}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          }}
-        />
-        <Stack.Screen
-          name="WeeklyChallenge"
-          component={WeeklyChallenge}
-          options={{
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          }}
-        />
-        <Stack.Screen
-          name="ArticleAndTips"
-          component={ArticleAndTips}
-          options={{
+      <ProfileProvider>
+        <Stack.Navigator
+          initialRouteName="Welcome"
+          screenOptions={{
             headerShown: false,
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            gestureEnabled: true,
+            gestureDirection: "horizontal",
+            cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
+            transitionSpec: {
+              open: {
+                animation: "timing",
+                config: {
+                  duration: 500,
+                },
+              },
+              close: {
+                animation: "timing",
+                config: {
+                  duration: 500,
+                },
+              },
+            },
           }}
-        />
-        <Stack.Screen name="Search" component={Search} />
-        <Stack.Screen name="Notification" component={Notification} />
-        <Stack.Screen
-          name="Profile"
-          component={Profile}
-          options={{
-            headerShown: false,
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          }}
-        />
-      </Stack.Navigator>
+        >
+          <Stack.Screen
+            name="Welcome"
+            component={Welcome}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
+            }}
+          />
+          <Stack.Screen
+            name="Welcome2"
+            component={Welcome2}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
+            }}
+          />
+          <Stack.Screen
+            name="Onboarding1"
+            component={Onboarding1}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
+            }}
+          />
+          <Stack.Screen
+            name="Onboarding2"
+            component={Onboarding2}
+            options={{
+              cardStyleInterpolator:
+                CardStyleInterpolators.forScaleFromCenterAndroid,
+              transitionSpec: {
+                open: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+                close: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+              },
+            }}
+          />
+          <Stack.Screen
+            name="Onboarding3"
+            component={Onboarding3}
+            options={{
+              cardStyleInterpolator:
+                CardStyleInterpolators.forScaleFromCenterAndroid,
+              transitionSpec: {
+                open: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+                close: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+              },
+            }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              transitionSpec: {
+                open: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+                close: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+              },
+            }}
+          />
+          <Stack.Screen
+            name="SignUp"
+            component={SignUp}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              transitionSpec: {
+                open: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+                close: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+              },
+            }}
+          />
+          <Stack.Screen
+            name="ForgotPass"
+            component={ForgotPass}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              transitionSpec: {
+                open: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+                close: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+              },
+            }}
+          />
+          <Stack.Screen
+            name="ResetPass"
+            component={ResetPass}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+          />
+          <Stack.Screen
+            name="ResetSuccess"
+            component={ResetSuccess}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forFadeFromCenter,
+            }}
+          />
+          <Stack.Screen
+            name="SetUp"
+            component={SetUp}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              transitionSpec: {
+                open: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+                close: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+              },
+            }}
+          />
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              transitionSpec: {
+                open: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+                close: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+              },
+            }}
+          />
+          <Stack.Screen
+            name="GenderPick"
+            component={GenderPick}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              transitionSpec: {
+                open: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+                close: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+              },
+            }}
+          />
+          <Stack.Screen
+            name="AgePicker"
+            component={AgePicker}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              transitionSpec: {
+                open: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+                close: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+              },
+            }}
+          />
+          <Stack.Screen
+            name="WeightPicker"
+            component={WeightPicker}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+          />
+          <Stack.Screen
+            name="HeightPicker"
+            component={HeightPicker}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              transitionSpec: {
+                open: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+                close: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+              },
+            }}
+          />
+          <Stack.Screen
+            name="GoalPicker"
+            component={GoalPicker}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              transitionSpec: {
+                open: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+                close: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+              },
+            }}
+          />
+          <Stack.Screen
+            name="ActiveLevel"
+            component={ActiveLevel}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              transitionSpec: {
+                open: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+                close: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+              },
+            }}
+          />
+          <Stack.Screen
+            name="FillProfile"
+            component={FillProfile}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              transitionSpec: {
+                open: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+                close: {
+                  animation: "spring",
+                  config: {
+                    stiffness: 1000,
+                    damping: 500,
+                    mass: 3,
+                    overshootClamping: true,
+                    restDisplacementThreshold: 0.01,
+                    restSpeedThreshold: 0.01,
+                  },
+                },
+              },
+            }}
+          />
+          <Stack.Screen
+            name="MainApp"
+            component={BottomTabNavigator}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Workout"
+            component={Workout}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+          />
+          <Stack.Screen
+            name="ProgressTracking"
+            component={ProgressTracking}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+          />
+          <Stack.Screen
+            name="Nutrition"
+            component={Nutrition}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+          />
+          <Stack.Screen
+            name="Community"
+            component={Community}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+          />
+          <Stack.Screen
+            name="Recommendation"
+            component={Recommendation}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+          />
+          <Stack.Screen
+            name="WeeklyChallenge"
+            component={WeeklyChallenge}
+            options={{
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+          />
+          <Stack.Screen
+            name="ArticleAndTips"
+            component={ArticleAndTips}
+            options={{
+              headerShown: false,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+          />
+          <Stack.Screen name="Search" component={Search} />
+          <Stack.Screen name="Notification" component={Notification} />
+          <Stack.Screen
+            name="Profile"
+            component={Profile}
+            options={{
+              headerShown: false,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+          />
+          <Stack.Screen
+            name="ProfileEdit"
+            component={ProfileEdit}
+            options={{
+              headerShown: false,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+          />
+          <Stack.Screen
+            name="Settings"
+            component={Settings}
+            options={{
+              headerShown: false,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+          />
+          <Stack.Screen
+            name="NotificationSetting"
+            component={NotificationSetting}
+            options={{
+              headerShown: false,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+          />
+          <Stack.Screen
+            name="PasswordSetting"
+            component={PasswordSetting}
+            options={{
+              headerShown: false,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+          />
+        </Stack.Navigator>
+      </ProfileProvider>
     </NavigationContainer>
   );
 };

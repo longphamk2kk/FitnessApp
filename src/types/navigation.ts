@@ -1,5 +1,12 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
+export type MainAppParamList = {
+  Home: undefined;
+  Progress: undefined;
+  Favourite: undefined;
+  Support: undefined;
+};
+
 export type RootStackParamList = {
   Welcome: undefined;
   Welcome2: undefined;
@@ -20,7 +27,7 @@ export type RootStackParamList = {
   ActiveLevel: undefined;
   FillProfile: undefined;
   Home: undefined;
-  MainApp: undefined;
+  MainApp: { screen: keyof MainAppParamList } | undefined;
   Workout: undefined;
   ProgressTracking: undefined;
   Nutrition: undefined;
@@ -31,6 +38,10 @@ export type RootStackParamList = {
   Search: undefined;
   Notification: undefined;
   Profile: undefined;
+  ProfileEdit: undefined;
+  Settings: undefined;
+  NotificationSetting: undefined;
+  PasswordSetting: undefined;
 };
 
 export type NavigationProps = NativeStackNavigationProp<RootStackParamList>;

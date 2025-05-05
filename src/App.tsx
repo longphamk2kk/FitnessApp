@@ -2,6 +2,7 @@ import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import AppNavigator from "./navigators/Navigation";
 import * as Font from "expo-font";
+import { AuthProvider } from "./contexts/AuthContext";
 
 export default function App() {
   const [fontsLoaded] = Font.useFonts({
@@ -28,8 +29,10 @@ export default function App() {
   }
 
   return (
-    <SafeAreaProvider>
-      <AppNavigator />
-    </SafeAreaProvider>
+    <AuthProvider>
+      <SafeAreaProvider>
+        <AppNavigator />
+      </SafeAreaProvider>
+    </AuthProvider>
   );
 }
