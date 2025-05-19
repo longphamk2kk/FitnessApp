@@ -22,6 +22,8 @@ import ArticleAndTips from "../screens/ArticleAndTips/ArticleAndTips";
 import Settings from "../screens/Settings/Settings";
 import NotificationSetting from "../screens/Settings/NotificationSetting";
 import PasswordSetting from "../screens/Settings/PasswordSetting";
+import TrainingDetail from "../screens/TrainingDetail";
+import ExerciseDetail from "../screens/ExerciseDetail";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -59,6 +61,8 @@ const HomeStack = () => {
       <Stack.Screen name="Recommendation" component={Recommendation} />
       <Stack.Screen name="WeeklyChallenge" component={WeeklyChallenge} />
       <Stack.Screen name="ArticleAndTips" component={ArticleAndTips} />
+      <Stack.Screen name="TrainingDetail" component={TrainingDetail} />
+      <Stack.Screen name="ExerciseDetail" component={ExerciseDetail} />
     </Stack.Navigator>
   );
 };
@@ -69,7 +73,6 @@ const ProgressStack = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        contentStyle: styles.screenContainer,
       }}
     >
       <Stack.Screen name="ProgressScreen" component={Progress} />
@@ -84,7 +87,6 @@ const FavouriteStack = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        contentStyle: styles.screenContainer,
       }}
     >
       <Stack.Screen name="FavouriteScreen" component={Favourite} />
@@ -98,7 +100,6 @@ const SupportStack = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        contentStyle: styles.screenContainer,
       }}
     >
       <Stack.Screen name="SupportScreen" component={Support} />

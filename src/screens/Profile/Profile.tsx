@@ -58,6 +58,9 @@ const Profile = () => {
       case "Logout":
         showModal();
         break;
+      case "Help":
+        navigation.navigate({ name: "HelpFAQ" });
+        break;
       // Xử lý các menu item khác
       default:
         break;

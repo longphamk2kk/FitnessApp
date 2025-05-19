@@ -33,6 +33,7 @@ export const styles = StyleSheet.create({
   leftContainer: {
     flexDirection: "row",
     alignItems: "center",
+    // bottom: 20,
   },
   rightContainer: {
     flexDirection: "row",

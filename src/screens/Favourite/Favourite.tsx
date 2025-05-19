@@ -37,7 +37,7 @@ const Favourite = () => {
     },
     {
       id: "3",
-      title: "Full Body HIIT",
+      title: "Full Body HIT",
       duration: 30,
       calories: 1210,
       exercises: 10,
@@ -97,8 +97,8 @@ const Favourite = () => {
       <Header title="Favourites" style={styles.header} />
 
       <View style={styles.filterContainer}>
-        <Text style={styles.filterLabel}>Sort By</Text>
         <View style={styles.filterButtonsContainer}>
+          <Text style={styles.filterLabel}>Sort By</Text>
           <FilterButton type="All" />
           <FilterButton type="Video" />
           <FilterButton type="Article" />
@@ -140,10 +140,11 @@ const styles = StyleSheet.create({
   filterLabel: {
     color: "#FFFFFF",
     fontSize: 16,
-    marginBottom: 12,
+    marginRight: 12,
   },
   filterButtonsContainer: {
     flexDirection: "row",
+    alignItems: "center",
     gap: 12,
   },
   filterButton: {

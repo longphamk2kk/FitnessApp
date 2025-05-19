@@ -181,7 +181,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#1C1C1E",
   },
   header: {
-    marginBottom: 20,
+    marginBottom: 5,
+    bottom: 25,
   },
   content: {
     flex: 1,

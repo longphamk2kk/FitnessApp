@@ -39,6 +39,8 @@ import Settings from "../screens/Settings/Settings";
 import NotificationSetting from "../screens/Settings/NotificationSetting";
 import PasswordSetting from "../screens/Settings/PasswordSetting";
 import { ProfileProvider } from "../context/ProfileContext";
+import HelpFAQ from "../screens/HelpFAQ/HelpFAQ";
+import TrainingDetail from "../screens/TrainingDetail";
 
 const Stack = createStackNavigator();
 
@@ -614,6 +616,19 @@ const AppNavigator = () => {
               headerShown: false,
               cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
             }}
+          />
+          <Stack.Screen
+            name="HelpFAQ"
+            component={HelpFAQ}
+            options={{
+              headerShown: false,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+          />
+          <Stack.Screen
+            name="TrainingDetail"
+            component={TrainingDetail}
+            options={{ headerShown: false }}
           />
         </Stack.Navigator>
       </ProfileProvider>

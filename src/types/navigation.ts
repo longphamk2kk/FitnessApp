@@ -42,6 +42,31 @@ export type RootStackParamList = {
   Settings: undefined;
   NotificationSetting: undefined;
   PasswordSetting: undefined;
+  HelpFAQ: undefined;
+};
+
+export type HomeStackParamList = {
+  HomeScreen: undefined;
+  Search: undefined;
+  Notification: undefined;
+  Profile: undefined;
+  ProfileEdit: undefined;
+  Settings: undefined;
+  NotificationSetting: undefined;
+  PasswordSetting: undefined;
+  Workout: undefined;
+  Nutrition: undefined;
+  Community: undefined;
+  Recommendation: undefined;
+  WeeklyChallenge: undefined;
+  ArticleAndTips: undefined;
+  TrainingDetail: { level: string };
+  ExerciseDetail: {
+    name: string;
+    time: string;
+    repetition: string;
+    level: string;
+  };
 };
 
 export type NavigationProps = NativeStackNavigationProp<RootStackParamList>;
