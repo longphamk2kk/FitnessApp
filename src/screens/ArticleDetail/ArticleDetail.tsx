@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Image, ScrollView, ActivityIndicator } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import Header from "../../components/Header";
-import { articlesService, Article } from "../../utils/articles.service";
+import { articlesService } from "../../utils/articles.service";
+import { Article } from "../../types/articles";
 import { styles } from "./Style";
 
 const ArticleDetail = () => {

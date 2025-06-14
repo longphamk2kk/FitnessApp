@@ -11,17 +11,14 @@ import { useNavigation } from "@react-navigation/native";
 import Header from "../../components/Header";
 import TipCard from "../../components/TipCard/TipCard";
 import { styles } from "./Style";
-import { articlesService, Article } from "../../utils/articles.service";
-
-const ITEMS_PER_PAGE = 10;
+import { articlesService } from "../../utils/articles.service";
+import { Article } from "../../types/articles";
 
 const ArticleAndTips = () => {
   const navigation = useNavigation();
-  const [currentPage, setCurrentPage] = useState(1);
   const [favorites, setFavorites] = useState<string[]>([]);
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
-  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     fetchArticles();
@@ -34,88 +31,11 @@ const ArticleAndTips = () => {
       console.log(data);
       
       setArticles(data);
-      setTotalPages(Math.ceil(data.length / ITEMS_PER_PAGE));
     } catch (error) {
       console.error("Failed to fetch articles:", error);
     } finally {
       setLoading(false);
     }
-  };
-
-  const renderPagination = () => {
-    const pages = [];
-    const maxVisiblePages = 5;
-    let startPage = 1;
-    let endPage = totalPages;
-
-    if (totalPages > maxVisiblePages) {
-      if (currentPage <= 3) {
-        endPage = maxVisiblePages;
-      } else if (currentPage >= totalPages - 2) {
-        startPage = totalPages - maxVisiblePages + 1;
-      } else {
-        startPage = currentPage - 2;
-        endPage = currentPage + 2;
-      }
-    }
-
-    if (startPage > 1) {
-      pages.push(
-        <TouchableOpacity
-          key="1"
-          style={styles.pageButton}
-          onPress={() => setCurrentPage(1)}
-        >
-          <Text style={styles.pageText}>1</Text>
-        </TouchableOpacity>
-      );
-      if (startPage > 2) {
-        pages.push(
-          <Text key="startEllipsis" style={styles.ellipsis}>
-            ...
-          </Text>
-        );
-      }
-    }
-
-    for (let i = startPage; i <= endPage; i++) {
-      pages.push(
-        <TouchableOpacity
-          key={i}
-          style={styles.pageButton}
-          onPress={() => setCurrentPage(i)}
-        >
-          <Text style={styles.pageText}>{i}</Text>
-        </TouchableOpacity>
-      );
-    }
-
-    if (endPage < totalPages) {
-      if (endPage < totalPages - 1) {
-        pages.push(
-          <Text key="endEllipsis" style={styles.ellipsis}>
-            ...
-          </Text>
-        );
-      }
-      pages.push(
-        <TouchableOpacity
-          key={totalPages}
-          style={styles.pageButton}
-          onPress={() => setCurrentPage(totalPages)}
-        >
-          <Text style={styles.pageText}>{totalPages}</Text>
-        </TouchableOpacity>
-      );
-    }
-
-    return pages;
-  };
-
-  const getCurrentPageItems = () => {
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const endIndex = startIndex + ITEMS_PER_PAGE;
-    return articles.slice(startIndex, endIndex);
   };
 
   const toggleFavorite = (id: string) => {
@@ -127,6 +47,7 @@ const ArticleAndTips = () => {
   };
 
   const navigateToArticleDetail = (id: string) => {
+    // @ts-ignore - Navigation typing issue will be resolved in navigation setup
     navigation.navigate("ArticleDetail", { id });
   };
 
@@ -143,7 +64,7 @@ const ArticleAndTips = () => {
       <Header title="Articles & Tips" onBack={() => navigation.goBack()} />
       <View style={styles.content}>
         <FlatList
-          data={getCurrentPageItems()}
+          data={articles}
           renderItem={({ item }) => (
             <TipCard
               key={item._id}
@@ -157,13 +78,11 @@ const ArticleAndTips = () => {
           )}
           keyExtractor={(item) => item._id}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={[styles.tipGrid, { paddingBottom: 20 }]}
-          style={{ paddingHorizontal: 20 }}
+          contentContainerStyle={{ paddingBottom: 20, paddingHorizontal: 20 }}
           ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
           ListFooterComponent={() => <View style={{ height: 20 }} />}
         />
       </View>
-      <View style={styles.paginationContainer}>{renderPagination()}</View>
     </View>
   );
 };

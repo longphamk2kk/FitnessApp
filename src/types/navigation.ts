@@ -35,7 +35,7 @@ export type RootStackParamList = {
   Recommendation: undefined;
   WeeklyChallenge: undefined;
   ArticleAndTips: undefined;
-  ArticleDetail: undefined;
+  ArticleDetail: { id: string };
   Search: undefined;
   Notification: undefined;
   Profile: undefined;

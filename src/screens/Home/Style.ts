@@ -151,6 +151,8 @@ export const styles = StyleSheet.create({
   articleGrid: {
     flexDirection: "row",
     justifyContent: "space-between",
+    gap: 10,
+    flexWrap: "wrap",
   },
   articleCard: {
     width: (width - 60) / 2,

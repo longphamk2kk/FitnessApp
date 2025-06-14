@@ -8,11 +8,13 @@ import {
   SafeAreaView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { NavigationProps, RootStackParamList } from "../../types/navigation";
+import { HomeStackParamList, NavigationProps, RootStackParamList } from "../../types/navigation";
 import WorkoutCard from "../../components/WorkoutCard";
 import { styles } from "./Style";
 import ArticleCard from "../../components/ArticleCard/ArticleCard";
 import { useAuth } from "../../contexts/AuthContext";
+import { Article } from "../../types/articles";
+import { articlesService } from "../../utils/articles.service";
 
 interface WorkoutItem {
   id: string;
@@ -86,6 +88,20 @@ const articleData = [
 const Home = () => {
   const navigation = useNavigation<NavigationProps>();
   const { user, isAuthenticated } = useAuth();
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        const data = await articlesService.getArticles();
+        setArticles(data);
+      } catch (error) {
+        console.error("Failed to fetch articles:", error);
+      }
+    };
+    fetchArticles();
+  }, []);
 
   // Get user's first name or fallback to username
   const getDisplayName = () => {
@@ -173,7 +189,7 @@ const Home = () => {
               key={item.id}
               style={styles.menuItem}
               onPress={() =>
-                navigation.navigate(item.screen as keyof RootStackParamList)
+                navigation.navigate(item.screen as keyof HomeStackParamList)
               }
             >
               <Image
@@ -253,15 +269,15 @@ const Home = () => {
             </TouchableOpacity>
           </View>
           <View style={styles.articleGrid}>
-            {articleData.map((article) => (
+            {articles.map((article) => (
               <ArticleCard
-                key={article.id}
-                title={article.title}
+                key={article._id}
+                title={article.name}
                 description={article.description}
-                image={article.image}
+                image={article?.avatar && require("../../assets/imgs/tip1.png")}
                 isFavorite={false}
                 onPress={() => {
-                  /* Xử lý khi click vào article */
+                  navigation.navigate("ArticleDetail", { id: article._id });
                 }}
               />
             ))}

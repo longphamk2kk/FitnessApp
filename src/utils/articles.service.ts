@@ -1,14 +1,5 @@
 import api from './api';
-
-export interface Article {
-  _id: string;
-  name: string;
-  description: string;
-  avatar: string;
-  content: string;
-  createdAt: string;
-  updatedAt: string;
-}
+import { Article } from '../types/articles';
 
 export const articlesService = {
   async getArticles(name?: string): Promise<Article[]> {
