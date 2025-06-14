@@ -6,6 +6,7 @@ interface TipCardProps {
   description: string;
   image: any;
   onPress: () => void;
+  onFavoritePress?: () => void;
   isFavorite: boolean;
 }
 
@@ -14,6 +15,7 @@ const TipCard: React.FC<TipCardProps> = ({
   description,
   image,
   onPress,
+  onFavoritePress,
   isFavorite,
 }) => {
   return (
@@ -23,7 +25,10 @@ const TipCard: React.FC<TipCardProps> = ({
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.description}>{description}</Text>
       </View>
-      <TouchableOpacity style={styles.starContainer} onPress={onPress}>
+      <TouchableOpacity 
+        style={styles.starContainer} 
+        onPress={onFavoritePress || onPress}
+      >
         <Image
           source={require("../../assets/icons/Others/icon_star.png")}
           style={[

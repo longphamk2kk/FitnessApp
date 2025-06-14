@@ -11,18 +11,22 @@ import { styles } from "./Style";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps } from "../../types/navigation";
 import Header from "../../components/Header";
+import { useRegistration } from "../../contexts/RegistrationContext";
 
 const { width } = Dimensions.get("window");
 const ITEM_WIDTH = 80;
 
 const WeightPicker = () => {
   const navigation = useNavigation<NavigationProps>();
-  const [selectedWeight, setSelectedWeight] = useState(75);
+  const { registrationData, updateRegistrationData } = useRegistration();
+  const [selectedWeight, setSelectedWeight] = useState(registrationData.weight || 75);
   const [selectedUnit, setSelectedUnit] = useState<"KG" | "LB">("KG");
   const scrollViewRef = useRef<ScrollView>(null);
 
   const handleContinue = () => {
-    navigation.navigate("HeightPicker");
+    // Save weight to registration context
+    updateRegistrationData({ weight: selectedWeight });
+    navigation.navigate("HeightPicker" as any);
   };
 
   const weights = Array.from({ length: 301 }, (_, i) => i);

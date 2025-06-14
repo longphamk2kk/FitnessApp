@@ -12,30 +12,96 @@ import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import { styles } from "./Style";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps } from "../../types/navigation";
 import * as ImagePicker from "expo-image-picker";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useRegistration } from "../../contexts/RegistrationContext";
+import { useAuth } from "../../contexts/AuthContext";
+import { authService } from "../../utils/auth.service";
 
 const FillProfile = () => {
   const navigation = useNavigation<NavigationProps>();
+  const { registrationData, resetRegistrationData } = useRegistration();
+  const { login: setAuthUser } = useAuth();
   const [avatar, setAvatar] = useState<string | null>(null);
-  const [fullName, setFullName] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [fullName, setFullName] = useState(registrationData.full_name || "");
+  const [nickname, setNickname] = useState(registrationData.nickname || "");
+  const [email, setEmail] = useState(registrationData.email || "");
+  const [phone, setPhone] = useState(registrationData.phone || "");
+  const [loading, setLoading] = useState(false);
 
   const handleBack = () => {
     navigation.goBack();
   };
 
-  const handleContinue = () => {
-    if (fullName && nickname && email && phone) {
-      navigation.navigate("MainApp");
-    } else {
-      Alert.alert("Error", "Please fill in all fields");
+  const handleContinue = async () => {
+    if (!fullName.trim()) {
+      Alert.alert("Error", "Please enter your full name");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      // Complete registration with all collected data
+      const completeRegistrationData = {
+        ...registrationData,
+        full_name: fullName.trim(),
+        nickname: nickname.trim() || undefined,
+        email: email.trim() || registrationData.email,
+        phone: phone.trim() || registrationData.phone,
+      };
+
+      console.log('🔄 Completing registration with setup data');
+      console.log('📋 Complete registration data:', {
+        username: completeRegistrationData.username,
+        full_name: completeRegistrationData.full_name,
+        email: completeRegistrationData.email,
+        phone: completeRegistrationData.phone,
+        gender: completeRegistrationData.gender,
+        age: completeRegistrationData.age,
+        weight: completeRegistrationData.weight,
+        height: completeRegistrationData.height,
+        goal: completeRegistrationData.goal,
+        level: completeRegistrationData.level,
+        hasPassword: !!completeRegistrationData.password
+      });
+
+      const response = await authService.registerWithSetup(completeRegistrationData);
+
+      if (response.success && response.user) {
+        // Store user in auth context
+        setAuthUser(response.user);
+
+        // Clear registration data
+        resetRegistrationData();
+
+        console.log('✅ Registration completed successfully');
+
+        Alert.alert(
+          "Welcome to FitBody!",
+          "Your account has been created and your profile is complete. Let's start your fitness journey!",
+          [
+            {
+              text: "Get Started",
+              onPress: () => navigation.navigate("MainApp" as any)
+            }
+          ]
+        );
+      } else {
+        Alert.alert("Registration Failed", response.message || "Failed to complete registration");
+      }
+    } catch (error: any) {
+      console.error("Registration completion error:", error);
+      Alert.alert(
+        "Registration Failed",
+        "Network error. Please check your connection and try again."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -218,13 +284,16 @@ const FillProfile = () => {
               <TouchableOpacity
                 style={[
                   styles.startButton,
-                  (!fullName || !nickname || !email || !phone) &&
-                    styles.startButtonDisabled,
+                  (!fullName.trim() || loading) && styles.startButtonDisabled,
                 ]}
                 onPress={handleContinue}
-                disabled={!fullName || !nickname || !email || !phone}
+                disabled={!fullName.trim() || loading}
               >
-                <Text style={styles.startButtonText}>Start</Text>
+                {loading ? (
+                  <ActivityIndicator color="#FFFFFF" />
+                ) : (
+                  <Text style={styles.startButtonText}>Complete Registration</Text>
+                )}
               </TouchableOpacity>
             </View>
           </View>

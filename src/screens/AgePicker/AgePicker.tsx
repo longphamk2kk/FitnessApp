@@ -10,13 +10,15 @@ import {
 import { styles } from "./Style";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps } from "../../types/navigation";
+import { useRegistration } from "../../contexts/RegistrationContext";
 
 const { width } = Dimensions.get("window");
 const ITEM_WIDTH = 80;
 
 const AgePicker = () => {
   const navigation = useNavigation<NavigationProps>();
-  const [selectedAge, setSelectedAge] = useState(28);
+  const { registrationData, updateRegistrationData } = useRegistration();
+  const [selectedAge, setSelectedAge] = useState(registrationData.age || 28);
   const scrollViewRef = useRef<ScrollView>(null);
 
   const handleBack = () => {
@@ -24,7 +26,9 @@ const AgePicker = () => {
   };
 
   const handleContinue = () => {
-    navigation.navigate("WeightPicker");
+    // Save age to registration context
+    updateRegistrationData({ age: selectedAge });
+    navigation.navigate("WeightPicker" as any);
   };
 
   const ages = Array.from({ length: 101 }, (_, i) => i);

@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import { styles } from "./Style";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps } from "../../types/navigation";
+import { useRegistration } from "../../contexts/RegistrationContext";
 
 const goals = [
   "Lose Weight",
@@ -14,7 +15,8 @@ const goals = [
 
 const GoalPicker = () => {
   const navigation = useNavigation<NavigationProps>();
-  const [selectedGoal, setSelectedGoal] = useState<string | null>(null);
+  const { registrationData, updateRegistrationData } = useRegistration();
+  const [selectedGoal, setSelectedGoal] = useState<string | null>(registrationData.goal || null);
 
   const handleBack = () => {
     navigation.goBack();
@@ -22,7 +24,10 @@ const GoalPicker = () => {
 
   const handleContinue = () => {
     if (selectedGoal) {
-      navigation.navigate("ActiveLevel");
+      // Save goal to registration context
+      updateRegistrationData({ goal: selectedGoal });
+      console.log('🎯 Goal saved to registration context:', selectedGoal);
+      navigation.navigate("ActiveLevel" as any);
     }
   };
 

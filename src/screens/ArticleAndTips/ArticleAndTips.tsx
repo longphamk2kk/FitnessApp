@@ -1,33 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
   TouchableOpacity,
   ScrollView,
   FlatList,
+  ActivityIndicator,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Header from "../../components/Header";
 import TipCard from "../../components/TipCard/TipCard";
 import { styles } from "./Style";
-
-const generateTipData = () => {
-  return Array.from({ length: 50 }, (_, index) => ({
-    id: `${index + 1}`,
-    title: `Tip ${index + 1}`,
-    description: "This is a description of the tip.",
-    image: require("../../assets/imgs/tip1.png"),
-  }));
-};
+import { articlesService, Article } from "../../utils/articles.service";
 
 const ITEMS_PER_PAGE = 10;
-const tipData = generateTipData();
-const totalPages = Math.ceil(tipData.length / ITEMS_PER_PAGE);
 
 const ArticleAndTips = () => {
   const navigation = useNavigation();
   const [currentPage, setCurrentPage] = useState(1);
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState<string[]>([]);
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [totalPages, setTotalPages] = useState(1);
+
+  useEffect(() => {
+    fetchArticles();
+  }, []);
+
+  const fetchArticles = async () => {
+    try {
+      setLoading(true);
+      const data = await articlesService.getArticles();
+      console.log(data);
+      
+      setArticles(data);
+      setTotalPages(Math.ceil(data.length / ITEMS_PER_PAGE));
+    } catch (error) {
+      console.error("Failed to fetch articles:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const renderPagination = () => {
     const pages = [];
@@ -102,7 +115,7 @@ const ArticleAndTips = () => {
   const getCurrentPageItems = () => {
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
     const endIndex = startIndex + ITEMS_PER_PAGE;
-    return tipData.slice(startIndex, endIndex);
+    return articles.slice(startIndex, endIndex);
   };
 
   const toggleFavorite = (id: string) => {
@@ -113,37 +126,43 @@ const ArticleAndTips = () => {
     }
   };
 
+  const navigateToArticleDetail = (id: string) => {
+    navigation.navigate("ArticleDetail", { id });
+  };
+
+  if (loading) {
+    return (
+      <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+        <ActivityIndicator size="large" color="#8E8EF3" />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <Header title="Articles & Tips" onBack={() => navigation.goBack()} />
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        <View style={styles.tipGrid}>
-          <FlatList
-            data={getCurrentPageItems()}
-            renderItem={({ item }) => (
-              <TipCard
-                key={item.id}
-                title={item.title}
-                description={item.description}
-                image={item.image}
-                isFavorite={favorites.includes(item.id)}
-                onPress={() => toggleFavorite(item.id)}
-              />
-            )}
-            keyExtractor={(item) => item.id}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{
-              paddingBottom: 20,
-            }}
-            style={{
-              paddingHorizontal: 20,
-            }}
-            ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
-            ListFooterComponent={() => <View style={{ height: 20 }} />}
-          />
-        </View>
-      </ScrollView>
-
+      <View style={styles.content}>
+        <FlatList
+          data={getCurrentPageItems()}
+          renderItem={({ item }) => (
+            <TipCard
+              key={item._id}
+              title={item.name}
+              description={item.description}
+              image={{ uri: item.avatar.startsWith('http') ? item.avatar : `http://localhost:1200/uploads/${item.avatar}` }}
+              isFavorite={favorites.includes(item._id)}
+              onPress={() => navigateToArticleDetail(item._id)}
+              onFavoritePress={() => toggleFavorite(item._id)}
+            />
+          )}
+          keyExtractor={(item) => item._id}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={[styles.tipGrid, { paddingBottom: 20 }]}
+          style={{ paddingHorizontal: 20 }}
+          ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+          ListFooterComponent={() => <View style={{ height: 20 }} />}
+        />
+      </View>
       <View style={styles.paginationContainer}>{renderPagination()}</View>
     </View>
   );

@@ -41,6 +41,7 @@ import PasswordSetting from "../screens/Settings/PasswordSetting";
 import { ProfileProvider } from "../context/ProfileContext";
 import HelpFAQ from "../screens/HelpFAQ/HelpFAQ";
 import TrainingDetail from "../screens/TrainingDetail";
+import ArticleDetail from "../screens/ArticleDetail/ArticleDetail";
 
 const Stack = createStackNavigator();
 
@@ -570,6 +571,14 @@ const AppNavigator = () => {
           <Stack.Screen
             name="ArticleAndTips"
             component={ArticleAndTips}
+            options={{
+              headerShown: false,
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+            }}
+          />
+          <Stack.Screen
+            name="ArticleDetail"
+            component={ArticleDetail}
             options={{
               headerShown: false,
               cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,

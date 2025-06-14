@@ -8,35 +8,58 @@ import {
   Alert,
   TouchableWithoutFeedback,
   Keyboard,
+  ActivityIndicator,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps } from "../../types/navigation";
 import * as LocalAuthentication from "expo-local-authentication";
 import { styles } from "./Style";
 import Header from "../../components/Header";
+import { authService } from "../../utils/auth.service";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Login = () => {
   const navigation = useNavigation<NavigationProps>();
-  const [email, setEmail] = useState("");
+  const { login: setAuthUser } = useAuth();
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleBack = () => {
     navigation.goBack();
   };
 
   const handleSignup = () => {
-    // Navigate to Signup screen
     navigation.navigate("SignUp");
   };
 
-  const handleLogin = () => {
-    // Giả sử đây là logic kiểm tra người dùng
-    const isNewUser = true; // Thay đổi giá trị này dựa trên logic thực tế của bạn
+  const handleLogin = async () => {
+    if (!username.trim() || !password.trim()) {
+      Alert.alert("Error", "Please enter both username and password");
+      return;
+    }
 
-    if (isNewUser) {
-      navigation.navigate("SetUp");
-    } else {
-      navigation.navigate("Home");
+    setLoading(true);
+    try {
+      const response = await authService.login({ username, password });
+
+      if (response.success && response.user) {
+        // Store user in context
+        setAuthUser(response.user);
+        console.log("Login successful:", response.user);
+        navigation.navigate("Home");
+      } else {
+        Alert.alert("Login Failed", response.message || "Invalid credentials");
+      }
+    } catch (error: any) {
+      console.error("Login error:", error);
+      // Handle network errors or other unexpected errors
+      Alert.alert(
+        "Login Failed",
+        "Network error. Please check your connection and try again."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -48,6 +71,7 @@ const Login = () => {
           "Error",
           "Your device is not compatible with biometric authentication"
         );
+        
         return;
       }
 
@@ -66,8 +90,13 @@ const Login = () => {
       });
 
       if (result.success) {
-        // TODO: Implement biometric login logic
-        navigation.navigate("Home");
+        // Check if user was previously logged in
+        const isAuth = await authService.isAuthenticated();
+        if (isAuth) {
+          navigation.navigate("Home");
+        } else {
+          Alert.alert("Error", "Please log in with username and password first");
+        }
       }
     } catch (error) {
       Alert.alert("Error", "An error occurred during authentication");
@@ -86,21 +115,20 @@ const Login = () => {
         <View style={styles.welcomeContainer}>
           <Text style={styles.welcomeText}>Welcome</Text>
           <Text style={styles.welcomeDescription}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Please enter your credentials to access your fitness journey.
           </Text>
         </View>
 
         <View style={styles.content}>
           <View style={styles.inputSection}>
-            <Text style={styles.inputLabel}>Username or email</Text>
+            <Text style={styles.inputLabel}>Username</Text>
             <TextInput
               style={styles.input}
-              placeholder="example@example.com"
-              value={email}
-              onChangeText={setEmail}
-              keyboardType="email-address"
+              placeholder="Enter your username"
+              value={username}
+              onChangeText={setUsername}
               autoCapitalize="none"
+              editable={!loading}
             />
 
             <Text style={styles.inputLabel}>Password</Text>
@@ -110,38 +138,52 @@ const Login = () => {
               value={password}
               onChangeText={setPassword}
               secureTextEntry
+              editable={!loading}
             />
 
             <TouchableOpacity
               style={styles.forgotPassword}
               onPress={handleForgotPassword}
+              disabled={loading}
             >
               <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-            <Text style={styles.loginButtonText}>Log In</Text>
+          <TouchableOpacity 
+            style={[styles.loginButton, loading && { opacity: 0.7 }]} 
+            onPress={handleLogin}
+            disabled={loading}
+          >
+            {loading ? (
+              <ActivityIndicator color="#FFFFFF" />
+            ) : (
+              <Text style={styles.loginButtonText}>Log In</Text>
+            )}
           </TouchableOpacity>
 
           <Text style={styles.orText}>or sign up with</Text>
 
           <View style={styles.socialButtonsContainer}>
-            <TouchableOpacity style={styles.socialButton}>
+            <TouchableOpacity style={styles.socialButton} disabled={loading}>
               <Image
                 source={require("../../assets/icons/Login/icon_google.png")}
                 style={styles.socialIcon}
                 resizeMode="contain"
               />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.socialButton}>
+            <TouchableOpacity style={styles.socialButton} disabled={loading}>
               <Image
                 source={require("../../assets/icons/Login/icon_facebook.png")}
                 style={styles.socialIcon}
                 resizeMode="contain"
               />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.socialButton}>
+            <TouchableOpacity 
+              style={styles.socialButton} 
+              onPress={handleBiometricAuth}
+              disabled={loading}
+            >
               <Image
                 source={require("../../assets/icons/Login/icon_faceid.png")}
                 style={[styles.socialIcon, { tintColor: "#7C57FF" }]}
@@ -153,7 +195,7 @@ const Login = () => {
           <View style={styles.bottomContainer}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Text style={styles.signupText}>Don't have an account? </Text>
-              <TouchableOpacity onPress={handleSignup}>
+              <TouchableOpacity onPress={handleSignup} disabled={loading}>
                 <Text style={styles.signupLink}>Sign up</Text>
               </TouchableOpacity>
             </View>

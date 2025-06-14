@@ -11,18 +11,23 @@ import { styles } from "./Style";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps } from "../../types/navigation";
 import Header from "../../components/Header";
+import { useRegistration } from "../../contexts/RegistrationContext";
 
 const { width } = Dimensions.get("window");
 const ITEM_WIDTH = 80;
 
 const HeightPicker = () => {
   const navigation = useNavigation<NavigationProps>();
-  const [selectedHeight, setSelectedHeight] = useState(170);
+  const { registrationData, updateRegistrationData } = useRegistration();
+  const [selectedHeight, setSelectedHeight] = useState(registrationData.height || 170);
   const [selectedUnit, setSelectedUnit] = useState<"CM" | "FT">("CM");
   const scrollViewRef = useRef<ScrollView>(null);
 
   const handleContinue = () => {
-    navigation.navigate("GoalPicker");
+    // Save height to registration context
+    updateRegistrationData({ height: selectedHeight });
+    console.log('📏 Height saved to registration context:', selectedHeight);
+    navigation.navigate("GoalPicker" as any);
   };
 
   const heights = Array.from({ length: 301 }, (_, i) => i);

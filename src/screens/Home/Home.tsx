@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -12,6 +12,7 @@ import { NavigationProps, RootStackParamList } from "../../types/navigation";
 import WorkoutCard from "../../components/WorkoutCard";
 import { styles } from "./Style";
 import ArticleCard from "../../components/ArticleCard/ArticleCard";
+import { useAuth } from "../../contexts/AuthContext";
 
 interface WorkoutItem {
   id: string;
@@ -84,6 +85,34 @@ const articleData = [
 
 const Home = () => {
   const navigation = useNavigation<NavigationProps>();
+  const { user, isAuthenticated } = useAuth();
+
+  // Get user's first name or fallback to username
+  const getDisplayName = () => {
+    if (!user) return "Guest";
+    
+    if (user.full_name) {
+      return user.full_name.split(' ')[0]; // Get first name
+    }
+    
+    return user.username;
+  };
+
+  // Get personalized greeting based on user's goal
+  const getPersonalizedGreeting = () => {
+    if (!user || !user.goal) {
+      return "It's time to challenge your limits.";
+    }
+
+    const goalGreetings = {
+      'Build Muscle': "Time to build some serious strength!",
+      'Lose Weight': "Every step brings you closer to your goal!",
+      'Stay Fit': "Keep that momentum going strong!",
+      'Shape Body': "Sculpt your way to success!",
+    };
+
+    return goalGreetings[user.goal as keyof typeof goalGreetings] || "It's time to challenge your limits.";
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -96,9 +125,9 @@ const Home = () => {
       >
         <View style={styles.header}>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>Hi, Madison</Text>
+            <Text style={styles.title}>Hi, {getDisplayName()}</Text>
             <Text style={styles.subtitle}>
-              It's time to challenge your limits.
+              {getPersonalizedGreeting()}
             </Text>
           </View>
 

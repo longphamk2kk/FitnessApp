@@ -3,6 +3,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import AppNavigator from "./navigators/Navigation";
 import * as Font from "expo-font";
 import { AuthProvider } from "./contexts/AuthContext";
+import { RegistrationProvider } from "./contexts/RegistrationContext";
 
 export default function App() {
   const [fontsLoaded] = Font.useFonts({
@@ -30,9 +31,11 @@ export default function App() {
 
   return (
     <AuthProvider>
-      <SafeAreaProvider>
-        <AppNavigator />
-      </SafeAreaProvider>
+      <RegistrationProvider>
+        <SafeAreaProvider>
+          <AppNavigator />
+        </SafeAreaProvider>
+      </RegistrationProvider>
     </AuthProvider>
   );
 }

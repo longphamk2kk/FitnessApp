@@ -3,12 +3,14 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import { styles } from "./Style";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps } from "../../types/navigation";
+import { useRegistration } from "../../contexts/RegistrationContext";
 
 const GenderPick = () => {
   const navigation = useNavigation<NavigationProps>();
+  const { registrationData, updateRegistrationData } = useRegistration();
   const [selectedGender, setSelectedGender] = useState<
     "male" | "female" | null
-  >(null);
+  >(registrationData.gender?.toLowerCase() as "male" | "female" || null);
 
   const handleBack = () => {
     navigation.goBack();
@@ -16,7 +18,11 @@ const GenderPick = () => {
 
   const handleContinue = () => {
     if (selectedGender) {
-      navigation.navigate("AgePicker");
+      // Save gender to registration context
+      updateRegistrationData({
+        gender: selectedGender === "male" ? "Male" : "Female"
+      });
+      navigation.navigate("AgePicker" as any);
     }
   };
 

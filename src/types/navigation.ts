@@ -35,6 +35,7 @@ export type RootStackParamList = {
   Recommendation: undefined;
   WeeklyChallenge: undefined;
   ArticleAndTips: undefined;
+  ArticleDetail: undefined;
   Search: undefined;
   Notification: undefined;
   Profile: undefined;
@@ -60,6 +61,7 @@ export type HomeStackParamList = {
   Recommendation: undefined;
   WeeklyChallenge: undefined;
   ArticleAndTips: undefined;
+  ArticleDetail: { id: string };
   TrainingDetail: { level: string };
   ExerciseDetail: {
     name: string;

@@ -4,16 +4,25 @@ import { styles } from "./Style";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps } from "../../types/navigation";
 import Header from "../../components/Header";
+import { useRegistration } from "../../contexts/RegistrationContext";
 
-const levels = ["Beginner", "Intermediate", "Advance"];
+const levels = ["Beginner", "Intermediate", "Advanced"];
 
 const ActiveLevel = () => {
   const navigation = useNavigation<NavigationProps>();
-  const [selectedLevel, setSelectedLevel] = useState<string | null>(null);
+  const { registrationData, updateRegistrationData } = useRegistration();
+  const [selectedLevel, setSelectedLevel] = useState<string | null>(
+    registrationData.level ? registrationData.level.charAt(0).toUpperCase() + registrationData.level.slice(1) : null
+  );
 
   const handleContinue = () => {
     if (selectedLevel) {
-      navigation.navigate("FillProfile");
+      // Save level to registration context
+      updateRegistrationData({
+        level: selectedLevel.toLowerCase() as 'beginner' | 'intermediate' | 'advanced'
+      });
+      console.log('💪 Level saved to registration context:', selectedLevel.toLowerCase());
+      navigation.navigate("FillProfile" as any);
     }
   };
 
